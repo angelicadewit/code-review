@@ -1,0 +1,281 @@
+
+/* 0. Imports ================================= */
+@import 'reset';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@600&display=swap');
+
+/* 1. Variables and Mixins ================================= */
+
+/* Ideally these would be in a separate SCSS file to import but since
+this is a code review, I feel its overkill to separate it */
+
+$mont: 'Montserrat', sans-serif;
+$play: 'Playfair Display', serif;
+
+$contentfontsize: 16;
+
+$smtablet-breakpoint: 900px;
+$lgtablet-breakpoint: 1024px;
+$desktop-breakpoint: 1366px;
+
+
+/* I'm sorry but I'm not good at naming variables */
+$bg: #d5e2ee;
+$svg: #cddae2;
+$text: #091035;
+
+
+
+@mixin tablet { 
+	@media only screen and (min-width: $smtablet-breakpoint){
+		@content;
+	}
+}
+
+@mixin large-tablet {
+	@media only screen and (min-width: $lgtablet-breakpoint){
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media only screen and (min-width: $desktop-breakpoint){
+		@content;
+	}
+}
+
+@function em($pixels, $context: $contentfontsize) {
+	@return #{$pixels/$context}em;
+}
+
+
+
+/* 2. Main Layout ================================= */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: $bg;
+	font-size: 16px;
+	font-family: $mont;
+	color: $text;
+}
+
+
+
+
+/* 3. Content ================================= */
+
+#content{
+	width: 500px;
+	display: flex;
+	justify-content: space-around;
+	margin: 20em auto;
+	background: #eee;
+	padding: 50px;
+
+
+	a{
+		display: block;
+		text-decoration: none;
+		color: $text;
+		padding: 10px;
+
+		&:hover{
+			color: $svg;
+			background: $text;
+		}
+	}
+}
+
+#card {
+	
+	.card-desc{
+		margin: em(40) em(18) em(42);
+	}
+	
+
+	.card-desc-link{
+		display: flex;
+		align-items: center;
+		font-family: $mont;
+		font-size: em(14);
+		text-transform: uppercase;
+		font-weight: 700;
+		text-decoration: none;
+		color: $text;
+		margin-bottom: em(20);
+		letter-spacing: 0.1em;
+		transition: 0.3s;
+
+		svg{
+			width: em(24);
+			height: em(24);
+			margin-right: em(9);
+			
+
+			circle{
+				fill: $svg;
+				transition: 0.3s;
+			}
+
+			path{
+				fill: $text;
+				transition: 0.3s;
+			}
+		}
+
+		&:hover{
+			background: $text;
+			color: $svg;
+
+			svg{
+				circle{
+					fill: $text;
+				}
+	
+				path{
+					fill: $svg;
+				}
+			}
+		}
+	}
+
+	h2{
+		font-size: em(36);
+		font-family: $play;
+		font-weight: 600;
+	}
+
+	.card-img{
+		width: 100%;
+		height: auto;
+	}
+
+	@include tablet{
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		.card-desc{
+			width: 50%;
+		}
+		
+		.card-img{
+			width: 50%;
+		}
+	}
+	
+	@include large-tablet{
+		
+		.card-desc-link{
+			font-size: 1em;
+		}
+		
+		h2{
+			font-size: em(56);
+		}
+	}
+	
+	@include desktop{
+		
+		.card-desc {
+			max-width: em(344);
+			margin-right: em(240);
+			display: flex;
+			flex-direction: column;
+		}
+	}
+}
+
+/* 4. JavaScript ============================= */
+
+#menuwrapper{
+	display: flex;
+	justify-content: center;
+}
+
+.dropdown{
+	width: 50%;
+}
+
+.menuwrapper-menu {
+	background-color: $text;
+	color: #eee;
+	cursor: pointer;
+	padding: em(18);
+	width: 100%;
+	text-align: center;
+	border: none;
+	position: relative;
+	
+	span{
+		font-family: $mont;
+		font-size: em(36);
+		transition: 0.3s;
+
+		&.is-close{
+			position: relative;
+			opacity: 1;
+		}
+
+		&.is-open{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			opacity: 0;
+		}
+	}
+
+	&.is-open{
+		span.is-close{
+			opacity: 0;
+		}
+		span.is-open{
+			opacity: 1;
+		}
+	}
+
+	&:active, &:hover {
+		background-color: #ccc;
+		background: green;
+	}
+
+}
+
+.menuwrapper-submenu{
+	background: #eee;
+	overflow: hidden;
+	max-height: 0px;
+	padding: 0px;
+	// transition: max-height 0.3s;
+	transition-property: max-height, padding;
+	transition-duration: 0.3s, 0s;
+	transition-delay: 0s;
+
+	h3{
+		margin-bottom: em(15);
+	}
+
+	a{
+		display: block;
+		text-decoration: none;
+		color: $text;
+		text-transform: uppercase;
+		margin-bottom: 5px;
+	}
+
+	&.is-open{
+		max-height: 1000px;
+		padding: 20px;
+	}
+	
+	&.is-close{
+		max-height: 0px;
+		padding: 0px;
+		transition-delay: 0s, 0.3s;
+		
+	}
+}

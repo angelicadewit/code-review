@@ -1,0 +1,271 @@
+/* 0. Imports ================================= */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@600&display=swap");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 1. Variables and Mixins ================================= */
+/* Ideally these would be in a separate SCSS file to import but since
+this is a code review, I feel its overkill to separate it */
+/* I'm sorry but I'm not good at naming variables */
+/* 2. Main Layout ================================= */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #d5e2ee;
+	font-size: 16px;
+	font-family: "Montserrat", sans-serif;
+	color: #091035;
+}
+
+/* 3. Content ================================= */
+#content {
+	width: 500px;
+	display: flex;
+	justify-content: space-around;
+	margin: 20em auto;
+	background: #eee;
+	padding: 50px;
+}
+
+#content a {
+	display: block;
+	text-decoration: none;
+	color: #091035;
+	padding: 10px;
+}
+
+#content a:hover {
+	color: #cddae2;
+	background: #091035;
+}
+
+#card .card-desc {
+	margin: 2.5em 1.125em 2.625em;
+}
+
+#card .card-desc-link {
+	display: flex;
+	align-items: center;
+	font-family: "Montserrat", sans-serif;
+	font-size: 0.875em;
+	text-transform: uppercase;
+	font-weight: 700;
+	text-decoration: none;
+	color: #091035;
+	margin-bottom: 1.25em;
+	letter-spacing: 0.1em;
+	transition: 0.3s;
+}
+
+#card .card-desc-link svg {
+	width: 1.5em;
+	height: 1.5em;
+	margin-right: 0.5625em;
+}
+
+#card .card-desc-link svg circle {
+	fill: #cddae2;
+	transition: 0.3s;
+}
+
+#card .card-desc-link svg path {
+	fill: #091035;
+	transition: 0.3s;
+}
+
+#card .card-desc-link:hover {
+	background: #091035;
+	color: #cddae2;
+}
+
+#card .card-desc-link:hover svg circle {
+	fill: #091035;
+}
+
+#card .card-desc-link:hover svg path {
+	fill: #cddae2;
+}
+
+#card h2 {
+	font-size: 2.25em;
+	font-family: "Playfair Display", serif;
+	font-weight: 600;
+}
+
+#card .card-img {
+	width: 100%;
+	height: auto;
+}
+
+@media only screen and (min-width: 900px) {
+	#card {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	#card .card-desc {
+		width: 50%;
+	}
+	#card .card-img {
+		width: 50%;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	#card .card-desc-link {
+		font-size: 1em;
+	}
+	#card h2 {
+		font-size: 3.5em;
+	}
+}
+
+@media only screen and (min-width: 1366px) {
+	#card .card-desc {
+		max-width: 21.5em;
+		margin-right: 15em;
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+/* 4. JavaScript ============================= */
+#menuwrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.dropdown {
+	width: 50%;
+}
+
+.menuwrapper-menu {
+	background-color: #091035;
+	color: #eee;
+	cursor: pointer;
+	padding: 1.125em;
+	width: 100%;
+	text-align: center;
+	border: none;
+	position: relative;
+}
+
+.menuwrapper-menu span {
+	font-family: "Montserrat", sans-serif;
+	font-size: 2.25em;
+	transition: 0.3s;
+}
+
+.menuwrapper-menu span.is-close {
+	position: relative;
+	opacity: 1;
+}
+
+.menuwrapper-menu span.is-open {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+
+.menuwrapper-menu.is-open span.is-close {
+	opacity: 0;
+}
+
+.menuwrapper-menu.is-open span.is-open {
+	opacity: 1;
+}
+
+.menuwrapper-menu:active, .menuwrapper-menu:hover {
+	background-color: #ccc;
+	background: green;
+}
+
+.menuwrapper-submenu {
+	background: #eee;
+	overflow: hidden;
+	max-height: 0px;
+	padding: 0px;
+	transition-property: max-height, padding;
+	transition-duration: 0.3s, 0s;
+	transition-delay: 0s;
+}
+
+.menuwrapper-submenu h3 {
+	margin-bottom: 0.9375em;
+}
+
+.menuwrapper-submenu a {
+	display: block;
+	text-decoration: none;
+	color: #091035;
+	text-transform: uppercase;
+	margin-bottom: 5px;
+}
+
+.menuwrapper-submenu.is-open {
+	max-height: 1000px;
+	padding: 20px;
+}
+
+.menuwrapper-submenu.is-close {
+	max-height: 0px;
+	padding: 0px;
+	transition-delay: 0s, 0.3s;
+}
+
+/*# sourceMappingURL=main.css.map */
